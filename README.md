@@ -59,25 +59,24 @@ You can install Postman via this website: https://www.postman.com/downloads/
     -   Open another new terminal, edit `ROCKET_PORT` in `.env` to `8003`, then execute `cargo run`.
 
 ## Mandatory Checklists (Subscriber)
--   [ ] Clone https://gitlab.com/ichlaffterlalu/bambangshop-receiver to a new repository.
+-   [x] Clone https://gitlab.com/ichlaffterlalu/bambangshop-receiver to a new repository.
 -   **STAGE 1: Implement models and repositories**
-    -   [ ] Commit: `Create Notification model struct.`
-    -   [ ] Commit: `Create SubscriberRequest model struct.`
-    -   [ ] Commit: `Create Notification database and Notification repository struct skeleton.`
-    -   [ ] Commit: `Implement add function in Notification repository.`
-    -   [ ] Commit: `Implement list_all_as_string function in Notification repository.`
-    -   [ ] Write answers of your learning module's "Reflection Subscriber-1" questions in this README.
+    -   [x] Commit: `Create SubscriberRequest model struct.`
+    -   [x] Commit: `Create Notification database and Notification repository struct skeleton.`
+    -   [x] Commit: `Implement add function in Notification repository.`
+    -   [x] Commit: `Implement list_all_as_string function in Notification repository.`
+    -   [x] Write answers of your learning module's "Reflection Subscriber-1" questions in this README.
 -   **STAGE 3: Implement services and controllers**
-    -   [ ] Commit: `Create Notification service struct skeleton.`
-    -   [ ] Commit: `Implement subscribe function in Notification service.`
-    -   [ ] Commit: `Implement subscribe function in Notification controller.`
-    -   [ ] Commit: `Implement unsubscribe function in Notification service.`
-    -   [ ] Commit: `Implement unsubscribe function in Notification controller.`
-    -   [ ] Commit: `Implement receive_notification function in Notification service.`
-    -   [ ] Commit: `Implement receive function in Notification controller.`
-    -   [ ] Commit: `Implement list_messages function in Notification service.`
-    -   [ ] Commit: `Implement list function in Notification controller.`
-    -   [ ] Write answers of your learning module's "Reflection Subscriber-2" questions in this README.
+    -   [x] Commit: `Create Notification service struct skeleton.`
+    -   [x] Commit: `Implement subscribe function in Notification service.`
+    -   [x] Commit: `Implement subscribe function in Notification controller.`
+    -   [x] Commit: `Implement unsubscribe function in Notification service.`
+    -   [x] Commit: `Implement unsubscribe function in Notification controller.`
+    -   [x] Commit: `Implement receive_notification function in Notification service.`
+    -   [x] Commit: `Implement receive function in Notification controller.`
+    -   [x] Commit: `Implement list_messages function in Notification service.`
+    -   [x] Commit: `Implement list function in Notification controller.`
+    -   [x] Write answers of your learning module's "Reflection Subscriber-2" questions in this README.
 
 ## Your Reflections
 This is the place for you to write reflections:
@@ -85,5 +84,13 @@ This is the place for you to write reflections:
 ### Mandatory (Subscriber) Reflections
 
 #### Reflection Subscriber-1
+1. menggunakan RwLock<> membolehkan kita untuk menggunakan multiple thread untuk membaca dari Vec<Notification> di method list_all_as_string. Jika kita menggunakan Mutex<>, kita hanya dapat membaca vektor dengan single thread satu waktu, hal ini sangat buruk jika dibandingkan dengan menggunakan banyak thread sekaligus. thorughtput pasti akan sangat besar
+
+2. variabel statis di rust itu immutable. hal ini agar 'safe' jika kita menggunakan eksekusi paralel. menggunakan lazy_static crate membuantu kita untuk menginisiasi variable secara 'lazy' ketika pertamakali diakses, hal ini membuat mereka sperti singleton. 
 
 #### Reflection Subscriber-2
+1. Yes, but not much. karena saya menggunakan linux, saya tertarik untuk membaca target seperti mempelajari bagaimana makefile dbibuat di linux. selain demikian saya juga sempat menemukan mamsalah diaman saya tidak melakukan ignoring pada git di folder target yang berisi makefile. jadi saya mengeksplor dan membaca baca bagaimana rust bekerja tidak hanya berdasar pada tutorial saja.
+
+2. Ya, mengintegrasikan subscribers yang lain itu mudah saja karena kita menggunakan observer pattern. mengapa? karena setiap instance di main app atau publisher memanage subsciber secara independen. Jika beberapa instance aplikasi Utama perlu mengomunikasikan perubahan kepada semua subscriber, sistem pengiriman notifikasi antar instance akan diperlukan. Namun, pendaftaran subscriber baru di beberapa instance aplikasi masih dapat dikelola secara efisien dengan mengirimkan permintaan HTTP ke titik akhir API yang sesuai untuk setiap instance.
+
+3. Ya, saya sudah mencoba membuat beberapa test yang saya sesuaikan dengan testcase saya. berdasarkan apa yang saya coba membuat testcase sangat mengurangi kecemasan jikalah melakukan upgrade fitur yang ada. dalam arti saya tidak perlu risau ada fitur yang 'nyenggol'
